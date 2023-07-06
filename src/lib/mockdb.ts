@@ -1,7 +1,6 @@
 export type Person = {
 	first_name: string;
 	surname: string;
-	id: number;
 };
 
 export type DayWorked = {
@@ -42,31 +41,9 @@ const data: { [key: number]: DayWorked[] } = {
 	]
 };
 
-const people: Person[] = [
-	{
-		first_name: 'John',
-		surname: 'Smith',
-		id: 0
-	},
-	{
-		first_name: 'Alan',
-		surname: 'Jones',
-		id: 1
-	},
-	{
-		first_name: 'Cameron',
-		surname: 'Young',
-		id: 2
-	}
-];
-
 export const getDaysWorked = (id: number): { name: string; data: DayWorked[] } => {
 	return {
-		name: people.find((person) => person.id === id)?.first_name ?? 'Could not find person',
+		name: 'Unimplemented',
 		data: data[id]
 	};
-};
-
-export const getPeople = (): Person[] => {
-	return people;
 };

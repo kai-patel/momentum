@@ -1,9 +1,8 @@
 <script lang="ts">
 	import Sidebar from '../../lib/Sidebar.svelte';
-	import type { PageData } from './$types';
-	import type { Person } from '../../lib/mockdb';
+	import type { PageServerData } from './$types';
 
-	export let data: PageData;
+	export let data: PageServerData;
 
 	import {
 		createSvelteTable,
@@ -15,11 +14,11 @@
 	import { writable } from 'svelte/store';
 	import { goto } from '$app/navigation';
 
-	const columns: ColumnDef<Person>[] = [
+	const columns: ColumnDef<(typeof data.data.people)[0]>[] = [
 		{
 			header: 'First Name',
-			accessorKey: 'first_name',
-			id: 'first_name'
+			accessorKey: 'firstName',
+			id: 'firstName'
 		},
 		{
 			header: 'Surname',
@@ -28,7 +27,7 @@
 		}
 	];
 
-	const options = writable<TableOptions<Person>>({
+	const options = writable<TableOptions<(typeof data.data.people)[0]>>({
 		data: data.data.people,
 		columns: columns,
 		getCoreRowModel: getCoreRowModel()

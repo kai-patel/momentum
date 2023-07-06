@@ -1,10 +1,17 @@
-import type { PageLoad } from './$types';
-import { getPeople } from '../../lib/mockdb';
+import type { PageServerLoad } from './$types';
+import prisma from '$lib/prisma';
 
-export const load = (({}) => {
+export const load = (async ({}) => {
+	const data = await prisma.person.findMany({
+		select: {
+			firstName: true,
+			surname: true
+		}
+	});
+
 	return {
 		data: {
-			people: getPeople()
+			people: data
 		}
 	};
-}) satisfies PageLoad;
+}) satisfies PageServerLoad;
