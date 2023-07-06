@@ -2,18 +2,18 @@
 	import { onMount } from 'svelte';
 	import moment from 'moment';
 
-	import type { PageData } from './$types';
+	import type { PageServerData } from './$types';
 	import type { DayWorked } from '$lib/mockdb';
 	import Sidebar from '$lib/Sidebar.svelte';
 	import { addWeek, getCurrentWeek, subtractWeek } from '$lib/time';
-	export let data: PageData;
+	export let data: PageServerData;
 
 	let days: Array<moment.Moment> = [];
 
 	let daysInput: Array<DayWorked> = [];
 
 	onMount(() => {
-        days = getCurrentWeek();
+		days = getCurrentWeek();
 
 		for (let i = 0; i < 7; i++) {
 			daysInput[i] = {

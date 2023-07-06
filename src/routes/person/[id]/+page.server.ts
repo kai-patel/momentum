@@ -1,10 +1,10 @@
 import { getDaysWorked } from '$lib/mockdb';
-import type { PageLoad } from './$types';
+import type { PageServerLoad } from './$types';
 
-export const load = (({ params }) => {
+export const load = (async ({ params }) => {
 	const data = getDaysWorked(parseInt(params.id, 10));
 
 	return {
 		data
 	};
-}) satisfies PageLoad;
+}) satisfies PageServerLoad;
