@@ -58,10 +58,10 @@
 					{/each}
 				</thead>
 				<tbody>
-					{#each $table.getRowModel().rows as row (row.id)}
+					{#each $table.getRowModel().rows as row, i}
 						<tr
 							class="cursor-default border-t hover:bg-gray-50"
-							on:click={() => goto(`/person/${row.id}`)}
+							on:click={() => goto(`/person/${data.data.people[i].id}`)}
 						>
 							{#each row.getVisibleCells() as cell}
 								<td class="py-2 px-4">

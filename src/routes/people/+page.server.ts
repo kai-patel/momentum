@@ -5,7 +5,8 @@ export const load = (async ({}) => {
 	const data = await prisma.person.findMany({
 		select: {
 			firstName: true,
-			surname: true
+			surname: true,
+			id: true
 		}
 	});
 
