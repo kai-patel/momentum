@@ -25,10 +25,3 @@ export const load = (async ({ params }) => {
 		days
 	};
 }) satisfies PageServerLoad;
-
-export const actions = {
-	save: async ({ request }) => {
-		const data = await request.formData();
-		console.log(data);
-	}
-} satisfies Actions;

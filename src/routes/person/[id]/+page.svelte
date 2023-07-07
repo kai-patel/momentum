@@ -44,13 +44,6 @@
 	function thisWeek() {
 		days = getCurrentWeek();
 	}
-
-	$: {
-		console.log(startedValues);
-		console.log(lunchStartedValues);
-		console.log(lunchEndedValues);
-		console.log(endedValues);
-	}
 </script>
 
 <body>
