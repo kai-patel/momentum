@@ -31,6 +31,8 @@
 		}
 	});
 
+	function save() {}
+
 	function prevWeek() {
 		days = subtractWeek(days);
 	}
@@ -119,25 +121,32 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="h-fit w-full flex justify-center gap-4">
+		<div class="p-2 h-fit w-full flex justify-center gap-4">
 			<button
 				on:click={prevWeek}
-				class="bg-blue-400 rounded shadow-lg font-semibold text-lg py-2 px-4"
+				class="text-white bg-zinc-600 rounded shadow-lg font-semibold text-lg py-2 px-4 hover:bg-zinc-700"
 			>
 				Previous Week
 			</button>
 			<button
 				on:click={thisWeek}
-				class="bg-green-400 rounded shadow-lg font-semibold text-lg py-2 px-4"
+				class="bg-orange-400 rounded shadow-lg font-semibold text-lg py-2 px-4 hover:bg-orange-500"
 			>
 				Current Week
 			</button>
 			<button
 				on:click={nextWeek}
-				class="bg-blue-400 rounded shadow-lg font-semibold text-lg py-2 px-4"
+				class="text-white bg-zinc-600 rounded shadow-lg font-semibold text-lg py-2 px-4 hover:bg-zinc-700"
 			>
 				Next Week
 			</button>
+		</div>
+		<div class="p-2 h-fit w-full flex justify-center gap-4">
+			<button
+				on:click={save}
+				class="bg-red-400 rounded shadow-lg font-semibold text-lg py-2 px-4 hover:bg-red-500"
+				>Save</button
+			>
 		</div>
 	</div>
 </body>
