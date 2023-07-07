@@ -1,5 +1,5 @@
 import prisma from '$lib/prisma';
-import type { PageServerLoad } from './$types';
+import type { Actions, PageServerLoad } from './$types';
 
 export const load = (async ({ params }) => {
 	// const data = getDaysWorked(parseInt(params.id, 10));
@@ -25,3 +25,10 @@ export const load = (async ({ params }) => {
 		days
 	};
 }) satisfies PageServerLoad;
+
+export const actions = {
+	save: async ({ request }) => {
+		const data = await request.formData();
+		console.log(data);
+	}
+} satisfies Actions;
