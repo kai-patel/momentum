@@ -15,32 +15,15 @@ model Person {
     firstName   String
     surname     String
     dateOfBirth DateTime
-    timesheets  Month[]
-}
-
-model Month {
-    id       String @id @default(uuid())
-    person   Person @relation(fields: [personId], references: [id])
-    year     Int
-    month    Int
-    personId String
-    weeks    Week[]
-}
-
-model Week {
-    id      String @id @default(uuid())
-    month   Month  @relation(fields: [monthId], references: [id])
-    week    Int
-    monthId String
-    days    Day[]
+    days        Day[]
 }
 
 model Day {
     id         String   @id @default(uuid())
-    week       Week     @relation(fields: [weekId], references: [id])
+    person     Person   @relation(fields: [personId], references: [id])
     dayStart   DateTime
     lunchStart DateTime
     lunchEnd   DateTime
     dayEnd     DateTime
-    weekId     String
+    personId   String
 }

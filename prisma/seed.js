@@ -7,28 +7,13 @@ const data = [
 		firstName: 'Charles',
 		surname: 'Barkley',
 		dateOfBirth: new Date(1963, 2, 20),
-		timesheets: {
+		days: {
 			create: [
 				{
-					year: 2023,
-					month: 5,
-					weeks: {
-						create: [
-							{
-								week: 0,
-								days: {
-									create: [
-										{
-											dayStart: new Date(2023, 7, 3, 8, 0),
-											lunchStart: new Date(2023, 7, 3, 13, 0),
-											lunchEnd: new Date(2023, 7, 3, 14, 0),
-											dayEnd: new Date(2023, 7, 3, 17, 15)
-										}
-									]
-								}
-							}
-						]
-					}
+					dayStart: new Date(2023, 7, 3, 8, 0),
+					lunchStart: new Date(2023, 7, 3, 13, 0),
+					lunchEnd: new Date(2023, 7, 3, 14, 0),
+					dayEnd: new Date(2023, 7, 3, 17, 15)
 				}
 			]
 		}
