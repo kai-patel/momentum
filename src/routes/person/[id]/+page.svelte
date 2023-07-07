@@ -3,85 +3,58 @@
 	import moment from 'moment';
 
 	import type { PageServerData } from './$types';
-	import type { DayWorked } from '$lib/mockdb';
 	import Sidebar from '$lib/Sidebar.svelte';
 	import { addWeek, getCurrentWeek, subtractWeek } from '$lib/time';
 	export let data: PageServerData;
 
-	let days: Array<moment.Moment> = [];
+	let days: moment.Moment[] = [];
 
-	let daysInput: Array<DayWorked> = [];
+	let startedValues: { [key: string]: string } = {};
+	let lunchStartedValues: { [key: string]: string } = {};
+	let lunchEndedValues: { [key: string]: string } = {};
+	let endedValues: { [key: string]: string } = {};
+
+	$: {
+	}
 
 	onMount(() => {
 		days = getCurrentWeek();
 
-		for (let i = 0; i < 7; i++) {
-			daysInput[i] = {
-				started: days[i].hours(0).seconds(0).toDate(),
-				lunchStart: days[i].hours(0).seconds(0).toDate(),
-				lunchEnd: days[i].hours(0).seconds(0).toDate(),
-				ended: days[i].hours(0).seconds(0).toDate(),
-				dayOfYear: days[i].dayOfYear()
-			};
-		}
+		for (let i = 0; i < data.days.length; i++) {
+			const dayData = data.days[i];
+			const day = moment(dayData.dayStart).format('YYYY-MM-DD');
 
-		for (let i = 0; i < daysInput.length; i++) {
-			for (let j = 0; j < data.data.data.length; j++) {
-				if (moment(data.data.data[j].started).dayOfYear() === daysInput[i].dayOfYear) {
-					daysInput[i] = data.data.data[j];
-				}
-			}
+			startedValues[day] = moment(dayData.dayStart).format('HH:mm');
+			lunchStartedValues[day] = moment(dayData.lunchStart).format('HH:mm');
+			lunchEndedValues[day] = moment(dayData.lunchEnd).format('HH:mm');
+			endedValues[day] = moment(dayData.dayEnd).format('HH:mm');
 		}
-
-		days = days;
-		daysInput = daysInput;
 	});
-
-	function updateDaysWorked() {
-		for (let i = 0; i < 7; i++) {
-			let day = days[i];
-			daysInput[i] = {
-				started: day.hours(0).seconds(0).toDate(),
-				lunchStart: day.hours(0).seconds(0).toDate(),
-				lunchEnd: day.hours(0).seconds(0).toDate(),
-				ended: day.hours(0).seconds(0).toDate(),
-				dayOfYear: day.dayOfYear()
-			};
-		}
-
-		for (let i = 0; i < daysInput.length; i++) {
-			for (let j = 0; j < data.data.data.length; j++) {
-				if (moment(data.data.data[j].started).dayOfYear() === daysInput[i].dayOfYear) {
-					daysInput[i] = data.data.data[j];
-				}
-			}
-		}
-
-		daysInput = daysInput;
-	}
 
 	function prevWeek() {
 		days = subtractWeek(days);
-		updateDaysWorked();
 	}
 
 	function nextWeek() {
 		days = addWeek(days);
-		updateDaysWorked();
 	}
 
 	function thisWeek() {
 		days = getCurrentWeek();
-		updateDaysWorked();
 	}
 
-	$: console.table(daysInput);
+	$: {
+		console.log(startedValues);
+		console.log(lunchStartedValues);
+		console.log(lunchEndedValues);
+		console.log(endedValues);
+	}
 </script>
 
 <body>
 	<Sidebar />
 	<div class="p-0 sm:ml-64 h-screen bg-slate-100">
-		<h1 class="pt-2 px-4 text-2xl font-bold">{`${data.data.name}`}</h1>
+		<h1 class="pt-2 px-4 text-2xl font-bold">{`${data.name.firstName} ${data.name.surname}`}</h1>
 		<div class="flex p-4 w-full h-fit">
 			<table class="w-full border-collapse shadow-md table-fixed md:table-auto bg-white">
 				<thead>
@@ -97,13 +70,10 @@
 				<tbody>
 					<tr class="border-t">
 						<td class="text-center font-semibold text-xs lg:text-lg">Day Start</td>
-						{#each daysInput as day, i}
+						{#each days as day}
 							<td class="py-2 px-4 text-center border-l border-r hover:shadow-inner">
 								<input
-									on:input={(e) =>
-										(day.started = moment(e.currentTarget.value, ['H:m'])
-											.day(days[i].day())
-											.toDate())}
+									bind:value={startedValues[day.format('YYYY-MM-DD')]}
 									type="time"
 									class="w-full h-full"
 								/>
@@ -112,13 +82,10 @@
 					</tr>
 					<tr class="border-t">
 						<td class="text-center font-semibold text-xs lg:text-lg">Lunch Start</td>
-						{#each daysInput as day, i}
+						{#each days as day}
 							<td class="py-2 px-4 text-center border-l border-r hover:shadow-inner">
 								<input
-									on:input={(e) =>
-										(day.lunchStart = moment(e.currentTarget.value, ['H:m'])
-											.day(days[i].day())
-											.toDate())}
+									bind:value={lunchStartedValues[day.format('YYYY-MM-DD')]}
 									type="time"
 									class="w-full h-full"
 								/>
@@ -127,13 +94,10 @@
 					</tr>
 					<tr class="border-t">
 						<td class="text-center font-semibold text-xs lg:text-lg">Lunch End</td>
-						{#each daysInput as day, i}
+						{#each days as day}
 							<td class="py-2 px-4 text-center border-l border-r hover:shadow-inner">
 								<input
-									on:input={(e) =>
-										(day.lunchEnd = moment(e.currentTarget.value, ['H:m'])
-											.day(days[i].day())
-											.toDate())}
+									bind:value={lunchEndedValues[day.format('YYYY-MM-DD')]}
 									type="time"
 									class="w-full h-full"
 								/>
@@ -142,13 +106,10 @@
 					</tr>
 					<tr class="border-t">
 						<td class="text-center font-semibold text-xs lg:text-lg">Day End</td>
-						{#each daysInput as day, i}
+						{#each days as day}
 							<td class="py-2 px-4 text-center border-l border-r hover:shadow-inner">
 								<input
-									on:input={(e) =>
-										(day.ended = moment(e.currentTarget.value, ['H:m'])
-											.day(days[i].day())
-											.toDate())}
+									bind:value={endedValues[day.format('YYYY-MM-DD')]}
 									type="time"
 									class="w-full h-full"
 								/>

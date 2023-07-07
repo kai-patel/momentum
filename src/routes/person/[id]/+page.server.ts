@@ -4,16 +4,24 @@ import type { PageServerLoad } from './$types';
 export const load = (async ({ params }) => {
 	// const data = getDaysWorked(parseInt(params.id, 10));
 
-	const weeks = await prisma.month.findMany({
+	const days = await prisma.day.findMany({
 		where: {
 			personId: params.id
+		}
+	});
+
+	const name = await prisma.person.findFirstOrThrow({
+		where: {
+			id: params.id
 		},
 		select: {
-			weeks: true
+			firstName: true,
+			surname: true
 		}
 	});
 
 	return {
-		// data
+		name,
+		days
 	};
 }) satisfies PageServerLoad;
