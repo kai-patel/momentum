@@ -51,7 +51,10 @@
 <body>
 	<Sidebar />
 	<div class="p-0 sm:ml-64 h-screen bg-slate-100">
-		<h1 class="pt-2 px-4 text-2xl font-bold">{`${data.name.firstName} ${data.name.surname}`}</h1>
+		<div class="w-full flex py-2 px-4 bg-slate-400 justify-between items-center">
+			<h1 class="text-2xl font-bold">{`${data.name.firstName} ${data.name.surname}`}</h1>
+			<button class="px-4 py-2 bg-red-500 rounded-xl font-bold" type="button">Delete Person</button>
+		</div>
 		<form method="POST" action="?/save">
 			<div class="flex p-4 w-full h-fit">
 				<table class="w-full border-collapse shadow-md table-fixed md:table-auto bg-white">
