@@ -4,8 +4,6 @@ import chunk from 'lodash/chunk';
 import moment from 'moment';
 
 export const load = (async ({ params }) => {
-	// const data = getDaysWorked(parseInt(params.id, 10));
-
 	const days = await prisma.day.findMany({
 		where: {
 			personId: params.id
@@ -37,14 +35,56 @@ export const actions = {
 		const days = [];
 
 		for (let i = 0; i < 7; i++) {
+			const date = moment(inputs[0][i][1].toString());
+			const day = date.date();
+			const month = date.month();
+			const year = date.year();
+
 			days.push({
-				dayStart: moment(inputs[0][i][1].toString(), 'HH:mm').toDate(),
-				lunchStart: moment(inputs[1][i][1].toString(), 'HH:mm').toDate(),
-				lunchEnd: moment(inputs[2][i][1].toString(), 'HH:mm').toDate(),
-				dayEnd: moment(inputs[3][i][1].toString(), 'HH:mm').toDate()
+				day,
+				month,
+				year,
+				dayStart: moment(inputs[1][i][1].toString(), 'HH:mm').toDate(),
+				lunchStart: moment(inputs[2][i][1].toString(), 'HH:mm').toDate(),
+				lunchEnd: moment(inputs[3][i][1].toString(), 'HH:mm').toDate(),
+				dayEnd: moment(inputs[4][i][1].toString(), 'HH:mm').toDate()
 			});
 		}
 
-		console.log(days);
+		const updates = [];
+		for (let i = 0; i < 7; i++) {
+			const day = days[i];
+
+			if (
+				!isNaN(day.dayStart.getDate()) &&
+				!isNaN(day.lunchStart.getDate()) &&
+				!isNaN(day.lunchEnd.getDate()) &&
+				!isNaN(day.dayEnd.getDate())
+			) {
+				console.log(day);
+				const dbDay = prisma.day.update({
+					where: {
+						personId_day_month_year: {
+							personId: event.params.id,
+							day: day.day,
+							month: day.month,
+							year: day.year
+						}
+					},
+					data: {
+						dayStart: day.dayStart,
+						lunchStart: day.lunchStart,
+						lunchEnd: day.lunchEnd,
+						dayEnd: day.dayEnd
+					}
+				});
+
+				updates.push(dbDay);
+			}
+		}
+
+		const runUpdates = await prisma.$transaction(updates);
+
+		console.log('UPDATES ----', runUpdates);
 	}
 } satisfies Actions;
