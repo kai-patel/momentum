@@ -40,6 +40,8 @@
 	"dependencies": {
 		"@prisma/client": "^4.16.2",
 		"@tanstack/svelte-table": "^8.9.4",
+		"@types/lodash": "^4.14.195",
+		"lodash": "^4.17.21",
 		"moment": "^2.29.4"
 	},
 	"prisma": {
