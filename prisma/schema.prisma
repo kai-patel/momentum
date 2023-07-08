@@ -19,11 +19,15 @@ model Person {
 }
 
 model Day {
-    id         String   @id @default(uuid())
     person     Person   @relation(fields: [personId], references: [id])
     dayStart   DateTime
     lunchStart DateTime
     lunchEnd   DateTime
     dayEnd     DateTime
     personId   String
+    day        Int
+    month      Int
+    year       Int
+
+    @@id([personId, day, month, year])
 }

@@ -13,7 +13,10 @@ const data = [
 					dayStart: new Date(2023, 7, 3, 8, 0),
 					lunchStart: new Date(2023, 7, 3, 13, 0),
 					lunchEnd: new Date(2023, 7, 3, 14, 0),
-					dayEnd: new Date(2023, 7, 3, 17, 15)
+					dayEnd: new Date(2023, 7, 3, 17, 15),
+					day: 3,
+					month: 6,
+					year: 2023
 				}
 			]
 		}
