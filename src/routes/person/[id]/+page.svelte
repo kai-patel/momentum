@@ -53,7 +53,9 @@
 	<div class="p-0 sm:ml-64 h-screen bg-slate-100">
 		<div class="w-full flex py-2 px-4 bg-slate-400 justify-between items-center">
 			<h1 class="text-2xl font-bold">{`${data.name.firstName} ${data.name.surname}`}</h1>
-			<button class="px-4 py-2 bg-red-500 rounded-xl font-bold" type="button">Delete Person</button>
+			<button class="px-4 py-2 bg-red-500 rounded-xl font-bold hover:bg-red-600" type="button"
+				>Delete Person</button
+			>
 		</div>
 		<form method="POST" action="?/save">
 			<div class="flex p-4 w-full h-fit">
@@ -151,7 +153,7 @@
 			<div class="p-2 h-fit w-full flex justify-center gap-4">
 				<button
 					type="submit"
-					class="bg-red-400 rounded shadow-lg font-semibold text-lg py-2 px-4 hover:bg-red-500"
+					class="bg-green-400 rounded shadow-lg font-semibold text-lg py-2 px-4 hover:bg-green-500"
 					>Save</button
 				>
 			</div>
