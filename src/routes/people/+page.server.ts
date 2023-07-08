@@ -37,6 +37,4 @@ export const actions = {
 
 		console.log('CREATED PERSON ----', createPerson);
 	}
-
-    // TODO Remove person
 } satisfies Actions;
