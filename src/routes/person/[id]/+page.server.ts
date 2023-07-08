@@ -1,7 +1,6 @@
 import prisma from '$lib/prisma';
 import type { Actions, PageServerLoad } from './$types';
 import chunk from 'lodash/chunk';
-import type { Prisma } from '@prisma/client';
 import moment from 'moment';
 
 export const load = (async ({ params }) => {
