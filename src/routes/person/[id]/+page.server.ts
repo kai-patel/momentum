@@ -2,6 +2,7 @@ import prisma from '$lib/prisma';
 import type { Actions, PageServerLoad } from './$types';
 import chunk from 'lodash/chunk';
 import moment from 'moment';
+import { redirect } from '@sveltejs/kit';
 
 export const load = (async ({ params }) => {
 	const days = await prisma.day.findMany({
@@ -100,5 +101,15 @@ export const actions = {
 		const runUpdates = await prisma.$transaction(updates);
 
 		console.log('UPDATES ----', runUpdates);
+	},
+
+	removePerson: async (event) => {
+		const removed = await prisma.person.delete({
+			where: {
+				id: event.params.id
+			}
+		});
+		console.log('REMOVED PERSON', removed);
+		return redirect(303, '/people');
 	}
 } satisfies Actions;
