@@ -58,6 +58,7 @@
 								<th class="px-4 py-2 font-semibold text-lg">
 									{day.format('dd DD/MM')}
 								</th>
+								<input type="hidden" name="date" value={day.toString()} />
 							{/each}
 						</tr>
 					</thead>
