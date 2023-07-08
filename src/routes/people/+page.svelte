@@ -100,6 +100,7 @@
 						id="firstName"
 						name="firstName"
 						type="text"
+						required
 					/>
 					<label class="font-semibold" for="firstName">Surname</label>
 					<input
@@ -108,6 +109,7 @@
 						id="surname"
 						name="surname"
 						type="text"
+						required
 					/>
 				</span>
 				<button
