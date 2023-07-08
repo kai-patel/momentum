@@ -1,4 +1,4 @@
-import type { PageServerLoad } from './$types';
+import type { Actions, PageServerLoad } from './$types';
 import prisma from '$lib/prisma';
 
 export const load = (async ({}) => {
@@ -16,3 +16,9 @@ export const load = (async ({}) => {
 		}
 	};
 }) satisfies PageServerLoad;
+
+export const actions = {
+	addPerson: async (event) => {
+		console.log(...(await event.request.formData()));
+	}
+} satisfies Actions;
