@@ -62,7 +62,7 @@ export const actions = {
 				!isNaN(day.dayEnd.getDate())
 			) {
 				console.log(day);
-				const dbDay = prisma.day.update({
+				const dbDay = prisma.day.upsert({
 					where: {
 						personId_day_month_year: {
 							personId: event.params.id,
@@ -71,7 +71,21 @@ export const actions = {
 							year: day.year
 						}
 					},
-					data: {
+					create: {
+						day: day.day,
+						month: day.month,
+						year: day.year,
+						dayStart: day.dayStart,
+						lunchStart: day.lunchStart,
+						lunchEnd: day.lunchEnd,
+						dayEnd: day.dayEnd,
+						person: {
+							connect: {
+								id: event.params.id
+							}
+						}
+					},
+					update: {
 						dayStart: day.dayStart,
 						lunchStart: day.lunchStart,
 						lunchEnd: day.lunchEnd,
