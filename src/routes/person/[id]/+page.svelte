@@ -22,7 +22,11 @@
 
 		for (let i = 0; i < data.days.length; i++) {
 			const dayData = data.days[i];
-			const day = moment(dayData.dayStart).format('YYYY-MM-DD');
+			const day = moment()
+				.year(dayData.year)
+				.month(dayData.month)
+				.date(dayData.day)
+				.format('YYYY-MM-DD');
 
 			startedValues[day] = moment(dayData.dayStart).format('HH:mm');
 			lunchStartedValues[day] = moment(dayData.lunchStart).format('HH:mm');
