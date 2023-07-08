@@ -54,7 +54,7 @@
 		<div class="w-full flex py-2 px-4 bg-slate-400 justify-between items-center">
 			<h1 class="text-2xl font-bold">{`${data.name.firstName} ${data.name.surname}`}</h1>
 			<form method="POST" action="?/removePerson">
-				<button class="px-4 py-2 bg-red-500 rounded-xl font-bold hover:bg-red-600" type="button"
+				<button class="px-4 py-2 bg-red-500 rounded-xl font-bold hover:bg-red-600" type="submit"
 					>Delete Person</button
 				>
 			</form>
