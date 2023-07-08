@@ -1,6 +1,8 @@
 import prisma from '$lib/prisma';
 import type { Actions, PageServerLoad } from './$types';
 import chunk from 'lodash/chunk';
+import type { Prisma } from '@prisma/client';
+import moment from 'moment';
 
 export const load = (async ({ params }) => {
 	// const data = getDaysWorked(parseInt(params.id, 10));
@@ -37,10 +39,10 @@ export const actions = {
 
 		for (let i = 0; i < 7; i++) {
 			days.push({
-				dayStart: inputs[0][i][1],
-				lunchStart: inputs[1][i][1],
-				lunchEnd: inputs[2][i][1],
-				dayEnd: inputs[3][i][1]
+				dayStart: moment(inputs[0][i][1].toString(), 'HH:mm').toDate(),
+				lunchStart: moment(inputs[1][i][1].toString(), 'HH:mm').toDate(),
+				lunchEnd: moment(inputs[2][i][1].toString(), 'HH:mm').toDate(),
+				dayEnd: moment(inputs[3][i][1].toString(), 'HH:mm').toDate()
 			});
 		}
 
