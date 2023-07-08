@@ -90,7 +90,7 @@
 				</tfoot>
 			</table>
 		</div>
-		<form method="POST" action="?/addUser">
+		<form method="POST" action="?/addPerson">
 			<div class="flex px-4 w-full justify-evenly items-center">
 				<span class="flex gap-4 items-center">
 					<label class="font-semibold" for="firstName">First Name</label>
