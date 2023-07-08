@@ -104,12 +104,21 @@ export const actions = {
 	},
 
 	removePerson: async (event) => {
-		const removed = await prisma.person.delete({
+		const removed = prisma.person.delete({
 			where: {
 				id: event.params.id
 			}
 		});
-		console.log('REMOVED PERSON', removed);
+
+		const removedRelation = prisma.day.deleteMany({
+			where: {
+				personId: event.params.id
+			}
+		});
+
+		const transaction = await prisma.$transaction([removed, removedRelation]);
+
+		console.log('REMOVED PERSON AND RELATED DAYS ----', transaction);
 		return redirect(303, '/people');
 	}
 } satisfies Actions;
