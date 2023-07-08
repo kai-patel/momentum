@@ -102,13 +102,22 @@
 						type="text"
 						required
 					/>
-					<label class="font-semibold" for="firstName">Surname</label>
+					<label class="font-semibold" for="surname">Surname</label>
 					<input
 						autocomplete="off"
 						class="rounded shadow px-1 py-[0.25rem]"
 						id="surname"
 						name="surname"
 						type="text"
+						required
+					/>
+					<label class="font-semibold" for="dateOfBirth">Date of Birth</label>
+					<input
+						autocomplete="off"
+						class="rounded shadow px-1 py-[0.25rem]"
+						id="dateOfBirth"
+						name="dateOfBirth"
+						type="date"
 						required
 					/>
 				</span>
