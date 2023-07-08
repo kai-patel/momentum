@@ -90,5 +90,31 @@
 				</tfoot>
 			</table>
 		</div>
+		<form method="POST" action="?/addUser">
+			<div class="flex px-4 w-full justify-evenly items-center">
+				<span class="flex gap-4 items-center">
+					<label class="font-semibold" for="firstName">First Name</label>
+					<input
+						autocomplete="off"
+						class="rounded shadow px-1 py-[0.25rem]"
+						id="firstName"
+						name="firstName"
+						type="text"
+					/>
+					<label class="font-semibold" for="firstName">Surname</label>
+					<input
+						autocomplete="off"
+						class="rounded shadow px-1 py-[0.25rem]"
+						id="surname"
+						name="surname"
+						type="text"
+					/>
+				</span>
+				<button
+					class="text-white font-semibold bg-zinc-600 hover:bg-zinc-700 shadow-md rounded px-4 py-2"
+					type="submit">Add New Person</button
+				>
+			</div>
+		</form>
 	</div>
 </body>
