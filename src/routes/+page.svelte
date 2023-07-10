@@ -13,7 +13,7 @@
 	</p>
 	<button
 		class="cursor-pointer bg-blue-400 rounded shadow-lg font-semibold text-lg py-2 px-4"
-		on:click={() => signIn()}
+		on:click={() => signIn(undefined, { callbackUrl: '/home' })}
 	>
 		Login
 	</button>
